@@ -22,18 +22,18 @@ include(${BCD_AUTO_ADD_SCRIPT})
 # END INCLUDE BUILD SCRIPTs
 
 # AUTO CLEANUP AT THE END OF THE CONFIGURATION STAGE
-function(cleanup)
-  # CLEANUP
-  message("-- [DEPS] Cleaning up dependencies folder.")
-  file(GLOB BUILD_DIRS "${EXTERNAL_LIBS_DIR}/force_*")
-  if(BUILD_DIRS) 
-      file(REMOVE_RECURSE ${BUILD_DIRS}) 
-  endif()
+# function(cleanup)
+#   # CLEANUP
+#   message("-- [DEPS] Cleaning up dependencies folder.")
+#   file(GLOB BUILD_DIRS "${EXTERNAL_LIBS_DIR}/force_*")
+#   if(BUILD_DIRS) 
+#       file(REMOVE_RECURSE ${BUILD_DIRS}) 
+#   endif()
 
-  if(EXISTS "${EXTERNAL_LIBS_DIR}/external")
-      file(REMOVE_RECURSE "${EXTERNAL_LIBS_DIR}/external")
-  endif()
-  # END CLEANUP
-endfunction()
+#   if(EXISTS "${EXTERNAL_LIBS_DIR}/external")
+#       file(REMOVE_RECURSE "${EXTERNAL_LIBS_DIR}/external")
+#   endif()
+#   # END CLEANUP
+# endfunction()
 
-cmake_language(DEFER DIRECTORY ${CMAKE_SOURCE_DIR} CALL cleanup)
+# cmake_language(DEFER DIRECTORY ${CMAKE_SOURCE_DIR} CALL cleanup)
