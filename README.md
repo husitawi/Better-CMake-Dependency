@@ -16,10 +16,7 @@ The main requirements are:
 * Adopt a simple plug n play solution that is environment agnostic.
 
 ### _Mechanism_
-1. The root CMakeLists file will first include the **_SetupThirdParty.cmake_** file from the **_/third_party_** directory. 
--- Including a file in cmake will bring the child into the parent scope
-2. **_SetupThirdParty.cmake_** will load the script that downloads the external dependency from GIT and attempt to build and install the latter sequentially. In other words, all dependencies will load at cmake's configuration stage so that packages are ready for use at build time. 
-3. **_SetupThirdParty.cmake_** will find all cmake files in **_/thid_party_** that have a naming of **tpBuild\*\*.cmake** where each file will describe the steps needed to load the dependency.
+1. **_setup.cmake_** will load the scripts that download the external dependency from GIT and attempt to build and install the latter sequentially. In other words, all dependencies will load at cmake's configuration stage so that packages are ready for use at build time. 
 
 # **How To Use**
 
