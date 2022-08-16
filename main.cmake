@@ -1,1 +1,1 @@
-include(./scripts/setup.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/scripts/setup.cmake)
