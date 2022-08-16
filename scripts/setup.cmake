@@ -11,13 +11,13 @@ cmake_path(ABSOLUTE_PATH tpPath BASE_DIRECTORY ${CMAKE_SOURCE_DIR} NORMALIZE OUT
 set(EXTERNAL_LIBS_DIR ${EXTERNAL_LIBS_DIR} CACHE INTERNAL "Directory for all third party packages.")
 
 # INCLUDE BUILD SCRIPTs
-set(TP_BUILD_SCRIPT "${CMAKE_CURRENT_SOURCE_DIR}/build_external_project.cmake")
+set(TP_BUILD_SCRIPT "${CMAKE_CURRENT_LIST_DIR}/build_external_project.cmake")
 include(${TP_BUILD_SCRIPT})
 
-set(BCD_ADD_SCRIPT "${CMAKE_CURRENT_SOURCE_DIR}/bcd_add.cmake")
+set(BCD_ADD_SCRIPT "${CMAKE_CURRENT_LIST_DIR}/bcd_add.cmake")
 include(${BCD_ADD_SCRIPT})
 
-set(BCD_AUTO_ADD_SCRIPT "${CMAKE_CURRENT_SOURCE_DIR}/bcd_auto_add.cmake")
+set(BCD_AUTO_ADD_SCRIPT "${CMAKE_CURRENT_LIST_DIR}/bcd_auto_add.cmake")
 include(${BCD_AUTO_ADD_SCRIPT})
 # END INCLUDE BUILD SCRIPTs
 
