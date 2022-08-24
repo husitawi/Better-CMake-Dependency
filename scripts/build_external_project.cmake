@@ -13,7 +13,7 @@ function (build_external_project target prefix isInterface isGitRepo gitTag url)
     endif()
 
 
-    if(${isGitRepo})
+    if(NOT ${isGitRepo})
 
         #generate false dependency project
         set(CMAKE_LIST_CONTENT "
