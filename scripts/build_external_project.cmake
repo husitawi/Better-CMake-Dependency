@@ -26,6 +26,8 @@ function (build_external_project target prefix isInterface isGitRepo gitTag url)
             GIT_REPOSITORY ${url}
             GIT_TAG ${gitTag}
 
+            GIT_PROGRESS TRUE
+
             SOURCE_SUBDIR ${CUSTOM_CMAKE_DIR}
             BUILD_ALWAYS 1
         ")
@@ -43,7 +45,7 @@ function (build_external_project target prefix isInterface isGitRepo gitTag url)
             SOURCE_SUBDIR ${CUSTOM_CMAKE_DIR}
             BUILD_ALWAYS 1
         ")
-        
+
     endif(${isGitRepo})
 
     if(isInterface)
