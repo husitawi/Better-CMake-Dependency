@@ -13,35 +13,37 @@ function (build_external_project target prefix isInterface isGitRepo gitTag url)
     endif()
 
 
-    if(NOT ${isGitRepo})
+    if(${isGitRepo})
 
         #generate false dependency project
         set(CMAKE_LIST_CONTENT "
-            cmake_minimum_required(VERSION 3.22)
-            project(ExternalProjectCustom)
-            include(ExternalProject)
-            ExternalProject_add(${target}
-                PREFIX ${prefix}/${target}
-                URL ${url}
-                SOURCE_SUBDIR ${CUSTOM_CMAKE_DIR}
-                BUILD_ALWAYS 1
-            ")
+        cmake_minimum_required(VERSION 3.22)
+        project(ExternalProjectCustom)
+        include(ExternalProject)
+        ExternalProject_add(${target}
+            PREFIX ${prefix}/${target}
+            
+            GIT_REPOSITORY ${url}
+            GIT_TAG ${gitTag}
+
+            SOURCE_SUBDIR ${CUSTOM_CMAKE_DIR}
+            BUILD_ALWAYS 1
+        ")
 
     else(${isGitRepo})
+        
         #generate false dependency project
         set(CMAKE_LIST_CONTENT "
-            cmake_minimum_required(VERSION 3.22)
-            project(ExternalProjectCustom)
-            include(ExternalProject)
-            ExternalProject_add(${target}
-                PREFIX ${prefix}/${target}
-                
-                GIT_REPOSITORY ${url}
-                GIT_TAG ${gitTag}
-
-                SOURCE_SUBDIR ${CUSTOM_CMAKE_DIR}
-                BUILD_ALWAYS 1
-            ")
+        cmake_minimum_required(VERSION 3.22)
+        project(ExternalProjectCustom)
+        include(ExternalProject)
+        ExternalProject_add(${target}
+            PREFIX ${prefix}/${target}
+            URL ${url}
+            SOURCE_SUBDIR ${CUSTOM_CMAKE_DIR}
+            BUILD_ALWAYS 1
+        ")
+        
     endif(${isGitRepo})
 
     if(isInterface)
