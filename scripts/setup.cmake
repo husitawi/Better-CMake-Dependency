@@ -37,3 +37,4 @@ function(cleanup)
 endfunction()
 
 cmake_language(DEFER DIRECTORY ${CMAKE_SOURCE_DIR} CALL cleanup)
+cleanup() # Force an initial cleanup
