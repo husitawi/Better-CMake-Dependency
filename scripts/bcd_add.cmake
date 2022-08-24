@@ -1,6 +1,6 @@
 function (bcd_add target isInterface isGitRepo gitTag url)
 
-    if(NOT EXISTS "${EXTERNAL_LIBS_DIR}/${DEPENDENCY_NAME}")
+    if(NOT EXISTS "${EXTERNAL_LIBS_DIR}/${target}")
         build_external_project(
                 ${target}
                 ${EXTERNAL_LIBS_DIR}/external
