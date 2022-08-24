@@ -1,7 +1,7 @@
 # This function is used to force a build on a dependant project at cmake configuration phase.
 # credit: https://stackoverflow.com/a/23570741/320103
 
-function (build_external_project target prefix isInterface url) #FOLLOWING ARGUMENTS are the CMAKE_ARGS of ExternalProject_Add
+function (build_external_project target prefix isInterface isGitRepo gitTag url) #FOLLOWING ARGUMENTS are the CMAKE_ARGS of ExternalProject_Add
 
     set(trigger_build_dir ${EXTERNAL_LIBS_DIR}/force_${target})
 
@@ -12,17 +12,37 @@ function (build_external_project target prefix isInterface url) #FOLLOWING ARGUM
         file(READ ${CUSTOM_CMAKE_SCT_FILE} CUSTOM_CMAKE_SCT_CONTENT)
     endif()
 
-    #generate false dependency project
-    set(CMAKE_LIST_CONTENT "
-        cmake_minimum_required(VERSION 3.22)
-        project(ExternalProjectCustom)
-        include(ExternalProject)
-        ExternalProject_add(${target}
-            PREFIX ${prefix}/${target}
-            URL ${url}
-            SOURCE_SUBDIR ${CUSTOM_CMAKE_DIR}
-            BUILD_ALWAYS 1
-        ")
+
+    if(${isGitRepo})
+
+        #generate false dependency project
+        set(CMAKE_LIST_CONTENT "
+            cmake_minimum_required(VERSION 3.22)
+            project(ExternalProjectCustom)
+            include(ExternalProject)
+            ExternalProject_add(${target}
+                PREFIX ${prefix}/${target}
+                URL ${url}
+                SOURCE_SUBDIR ${CUSTOM_CMAKE_DIR}
+                BUILD_ALWAYS 1
+            ")
+
+    else(${isGitRepo})
+        #generate false dependency project
+        set(CMAKE_LIST_CONTENT "
+            cmake_minimum_required(VERSION 3.22)
+            project(ExternalProjectCustom)
+            include(ExternalProject)
+            ExternalProject_add(${target}
+                PREFIX ${prefix}/${target}
+                
+                GIT_REPOSITORY ${url}
+                GIT_TAG ${gitTag}
+
+                SOURCE_SUBDIR ${CUSTOM_CMAKE_DIR}
+                BUILD_ALWAYS 1
+            ")
+    endif(${isGitRepo})
 
     if(isInterface)
         set(CMAKE_LIST_CONTENT 
